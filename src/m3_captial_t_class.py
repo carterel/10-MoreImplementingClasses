@@ -305,7 +305,7 @@ class CapitalT(object):
         new_letter_thickness = self.letter_thickness
 
         clone = CapitalT(new_intersection_center, new_width, new_height, new_letter_thickness)
-        clone.set_colors(self.)
+        # clone.set_colors(self.)
 
 
 # ----------------------------------------------------------------------
