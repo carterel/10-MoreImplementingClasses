@@ -2,8 +2,8 @@
 A   CapitalT   class and methods that use the Cross class.
 
 Authors: David Mutchler, Vibha Alangar, Dave Fisher, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Ethan Carter.
+"""  # Done: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -22,7 +22,7 @@ def main():
     # run_test_simple_t()
     # run_test_set_colors()
     # run_test_move_by()
-    # run_test_clone()
+    run_test_clone()
 
 
 def run_test_simple_t():
@@ -146,11 +146,38 @@ class CapitalT(object):
           :type letter_thickness:   int
         """
         # --------------------------------------------------------------
-        # TODO: 3.
+        # Done: 3.
         #   READ the above specification, including the Example.
         #   Implement this method
         #   Note: you will need to also implement attach_to before testing
         # --------------------------------------------------------------
+
+        self.intersection_center = intersection_center
+        self.height = height
+        self.width = width
+        self.letter_thickness = letter_thickness
+
+        h_left_corner_x = intersection_center.x - (width / 2)
+        h_right_corner_x = intersection_center.x + (width / 2)
+
+        h_left_corner_y = intersection_center.y - (letter_thickness / 2)
+        h_right_corner_y = intersection_center.y + (letter_thickness / 2)
+
+        h_left_corner = rg.Point(h_left_corner_x, h_left_corner_y)
+        h_right_corner = rg.Point(h_right_corner_x, h_right_corner_y)
+
+        self.h_rect = rg.Rectangle(h_left_corner, h_right_corner)
+
+        v_left_corner_x = intersection_center.x - (letter_thickness / 2)
+        v_right_corner_x = intersection_center.x + (letter_thickness / 2)
+
+        v_left_corner_y = intersection_center.y - (letter_thickness / 2)
+        v_right_corner_y = intersection_center.y + height
+
+        v_left_corner = rg.Point(v_left_corner_x, v_left_corner_y)
+        v_right_corner = rg.Point(v_right_corner_x, v_right_corner_y)
+
+        self.v_rect = rg.Rectangle(v_left_corner, v_right_corner)
 
     def attach_to(self, window):
         """
@@ -171,11 +198,14 @@ class CapitalT(object):
           :type window: rg.RoseWindow
         """
         # --------------------------------------------------------------
-        # TODO: 4.
+        # Done: 4.
         #   READ the above specification, including the Example.
         #   Implement and test this method by looking at the console and
         #     the graphics window (compare it to simple_t.pdf)
         # --------------------------------------------------------------
+
+        self.v_rect.attach_to(window)
+        self.h_rect.attach_to(window)
 
     def set_colors(self, fill_color, outline_color):
         """
@@ -198,12 +228,17 @@ class CapitalT(object):
           :type outline_color: str
         """
         # --------------------------------------------------------------
-        # TODO: 5.
+        # Done: 5.
         #   READ the above specification, including the Example.
         #   Implement and test this method by uncommenting the appropriate
         #     run_test method in main. Compare the graphics window to
         #     set_colors.pdf.
         # --------------------------------------------------------------
+        self.h_rect.fill_color = fill_color
+        self.v_rect.fill_color = fill_color
+
+        self.h_rect.outline_color = outline_color
+        self.v_rect.outline_color = outline_color
 
     def move_by(self, dx, dy):
         """
@@ -228,7 +263,7 @@ class CapitalT(object):
           :type dy: int
         """
         # --------------------------------------------------------------
-        # TODO: 6.
+        # Done: 6.
         #   READ the above specification, including the Example.
         #   Implement and test this method by uncommenting the appropriate
         #     run_test method in main. Compare the graphics window to
@@ -236,6 +271,8 @@ class CapitalT(object):
         #     that the T moves through, but there is only 1 T at any moment.
         # --------------------------------------------------------------
 
+        self.h_rect.move_by(dx, dy)
+        self.v_rect.move_by(dx, dy)
     def clone(self):
         """
         What comes in:
@@ -262,6 +299,13 @@ class CapitalT(object):
         #     run_test method in main. Compare the graphics window to
         #     clone.pdf.
         # --------------------------------------------------------------
+        new_intersection_center = self.intersection_center.clone()
+        new_height = self.height
+        new_width = self.width
+        new_letter_thickness = self.letter_thickness
+
+        clone = CapitalT(new_intersection_center, new_width, new_height, new_letter_thickness)
+        clone.set_colors(self.)
 
 
 # ----------------------------------------------------------------------
